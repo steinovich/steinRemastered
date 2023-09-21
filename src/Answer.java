@@ -12,32 +12,32 @@ public class Answer {
         String command = scan.nextLine();
         do {
             switch (command) {
-                case "–¥–∞":
+                case "‰‡":
                 case "y":
                 case "yes":
-                case "–î–ê":
+                case "ƒ¿":
                 case "YES":
-                case "–¥":
-                case "–î":
+                case "‰":
+                case "ƒ":
                     commandRight = true;
                     out = "yes";
                     break;
-                case "–Ω–µ—Ç":
+                case "ÌÂÚ":
                 case "n":
                 case "no":
                 case "NO":
-                case "–ù–ï–¢":
-                case "–ù":
-                case "–Ω":
+                case "Õ≈“":
+                case "Õ":
+                case "Ì":
                     commandRight = true;
                     out = "no";
                     break;
                 case "exit":
                 case "EXIT":
-                case "–≤—ã—Ö–æ–¥":
-                case "–í–´–•–û–î":
-                case "–í":
-                case "–≤":
+                case "‚˚ıÓ‰":
+                case "¬€’Œƒ":
+                case "¬":
+                case "‚":
                 case "e":
                     commandRight = true;
                     out = "exit";

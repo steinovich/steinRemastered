@@ -99,7 +99,7 @@ class Authentication {
         System.out.println(lang.inputPassword);
         int passIn = scan.nextLine().hashCode();
         //==============checkOutProgram==================================
-        if (passIn == "exit".hashCode() || passIn == "РІС‹С…РѕРґ".hashCode()) {
+        if (passIn == "exit".hashCode() || passIn == "выход".hashCode()) {
             System.out.println(lang.cancel);
             return false;
         }

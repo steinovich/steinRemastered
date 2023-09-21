@@ -84,7 +84,7 @@ public class Language {
         while (line != null&&!line.equals("language="+inputLanguage)){
             line = bufferReader.readLine();
         }
-        while ((line != null &&!line.equals("}"))){//&&!line.contains(word+":"))){
+        while ((line != null &&!line.equals("}")&&!line.contains(word+":"))){
             line = bufferReader.readLine();
 
         }

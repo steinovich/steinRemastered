@@ -12,7 +12,7 @@ public class Registration {
     }
 
     /**
-     * Р·РµР»РµРЅС‹Р№  РєРѕРјРјРµРЅС‚Р°СЂРёР№
+     * зеленый  комментарий
      */
     public void regAcc(BaseInterface base, Language language) throws IOException, ClassNotFoundException {
         this.language=language;

@@ -78,7 +78,7 @@ public class BaseText implements BaseInterface{
     public int getPass(String name) throws IOException {
 
         String password = getAccount("password", name);
-        return Integer.parseInt(password);// РІС‹РґР°С‡Р° РїР°СЂРѕР»СЏ РІ СЃРєСЂС‹С‚РѕРј С…РµС€Рµ
+        return Integer.parseInt(password);// выдача пароля в скрытом хеше
     }
 
     public boolean checkExistName(String name) throws IOException {
@@ -108,7 +108,7 @@ public class BaseText implements BaseInterface{
         }
         BufferedReader bufferReader = new BufferedReader(fileReader);
         String account;
-        String delimiter; // Р Р°Р·РґРµР»РёС‚РµР»СЊ
+        String delimiter; // Разделитель
         String[] subStr;
         subStr = new String[5];
         subStr[1] = "";
@@ -116,7 +116,7 @@ public class BaseText implements BaseInterface{
         int firstIndex;
         int secondIndex;
         String partAcc;
-        // Р’С‹РІРѕРґ СЂРµР·СѓР»СЊС‚Р°С‚Р° РЅР° СЌРєСЂР°РЅ
+        // Вывод результата на экран
         switch (part) {
             case "name":
                 delimiter = "";
@@ -143,7 +143,7 @@ public class BaseText implements BaseInterface{
 
         while (account != null && !subStr[1].equals(name)) {
             //        System.out.println("acc" + account);
-            subStr = account.split("\t!\t", 3);        // Р Р°Р·Р±РёС‚СЊ СЃС‚СЂРѕРєСѓ str СЃ РїРѕСЂРѕРіРѕРј СЂР°РІРЅС‹Рј 3, РєРѕС‚РѕСЂС‹Р№ РѕР·РЅР°С‡Р°РµС‚, РєР°Рє РјРЅРѕРіРѕ РїРѕРґСЃС‚СЂРѕРє, РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РІРѕР·РІСЂР°С‰РµРЅРѕ.
+            subStr = account.split("\t!\t", 3);        // Разбить строку str с порогом равным 3, который означает, как много подстрок, должно быть возвращено.
 
             account = bufferReader.readLine();
             //            accountLast=account;
@@ -158,7 +158,7 @@ public class BaseText implements BaseInterface{
             partAcc = secondSubStr[secondIndex];
         }//separate "Password"
         // and  "    !"
-        return partAcc;// РІС‹РґР°С‡Р° РїР°СЂРѕР»СЏ РІ СЃРєСЂС‹С‚РѕРј С…РµС€Рµ
+        return partAcc;// выдача пароля в скрытом хеше
 
     }
 
