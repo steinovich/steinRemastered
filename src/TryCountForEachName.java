@@ -1,11 +1,11 @@
-public class TryCount {
+public class TryCountForEachName {
     private int tryCount;
     private String name;
-    public TryCount(int tryCount,String name){
+    public TryCountForEachName(int tryCount, String name){
         this.tryCount=tryCount;
         this.name=name;
     }
-    public TryCount(){
+    public TryCountForEachName(){
 
     }
 

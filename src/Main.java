@@ -9,7 +9,7 @@ import java.io.IOException;
 public class Main {
     private static Language language;
     private static BaseInterface base;
-    private static Answer input;
+    private static Input input;
     private static Authentication auth;
 
 
@@ -17,7 +17,7 @@ public class Main {
 
         language = new Language();
         base = new BaseObject(language);
-        input = new Answer(language);
+        input = new Input(language);
         auth = new Authentication(language);
 
         do {
@@ -30,17 +30,12 @@ public class Main {
         } while (!WantExit());
     }
 
-
-
-
-
-
     public static void filingBase() throws IOException, ClassNotFoundException {
         System.out.println(language.emptyBase);
         System.out.println(language.regAtLestOne);
         System.out.println(language.doYouWantReg);
 
-        switch (input.checkCommands()) {
+        switch (input.checkCommands(language.doYouWantReg)) {
             case "yes":
 
                 Registration reg = new Registration(language);
@@ -51,20 +46,17 @@ public class Main {
         }
     }
 
-
-
-
     static void askAction() throws IOException, ClassNotFoundException {
         System.out.println(language.doYouHaveAcc);
 //=====================General menu========================================
 //=====================checking input commands========================================
 
-        switch (input.checkCommands()) {
+        switch (input.checkCommands(language.doYouHaveAcc)) {
             case "exit":
                 break;
             case "no":
                 System.out.println(language.doYouWantReg);
-                switch (input.checkCommands()) {
+                switch (input.checkCommands(language.doYouWantReg)) {
                     case "no":
                     case "exit":
                         break;
@@ -84,29 +76,13 @@ public class Main {
         }
 
     }
-    /**
-     *
-     *
-     *
-     * */
-
 
     static boolean WantExit() {
         System.out.println(language.doYouWantExit);
-        return "yes".equals(input.checkCommands());
+        return "yes".equals(input.checkCommands(language.doYouWantExit));
     }
-
-
-
-    //================================================================
-
-    //=========additional function====================================
-
-    //================================================================
-
-
 }
 
 
-//25.06.23
+//15.07.24
 

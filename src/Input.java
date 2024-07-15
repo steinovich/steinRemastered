@@ -1,12 +1,12 @@
 import java.util.Scanner;
 
-public class Answer {
+public class Input {
     Language language;
     Scanner scan = new Scanner(System.in);
-    public Answer(Language lng){
+    public Input(Language lng){
         language=lng;
     }
-    public String checkCommands() {
+    public String checkCommands(String phrase) {
         boolean commandRight = false;
         String out = "";
         String command = scan.nextLine();
@@ -43,7 +43,7 @@ public class Answer {
                     out = "exit";
                     break;
                 default:
-                    System.out.println(language.inputYesNo);
+                    System.out.println(phrase);
                     command = scan.nextLine();
             }
         } while (!commandRight);

@@ -8,22 +8,22 @@ class Authentication {
     Scanner scan;
     Registration reg;
     ArrayList<String> names;
-    Answer input;
+    Input input;
     ArrayList<String> checkedNames;
 
-    TryCount tryCount;
-    ArrayList<TryCount> tryCountsArray;
+    TryCountForEachName tryCount;
+    ArrayList<TryCountForEachName> tryCountForEachNameArrayList;
 
     public Authentication(Language language) {
-        Count =5;
+        Count = 1;
         lang = language;
         reg = new Registration(lang);
         scan = new Scanner(System.in);
         names = new ArrayList<>();
-        input = new Answer(lang);
+        input = new Input(lang);
         names = new ArrayList<>();
-        tryCountsArray =new ArrayList<>();
-        checkedNames=new ArrayList<>();
+        tryCountForEachNameArrayList = new ArrayList<>();
+        checkedNames = new ArrayList<>();
 //        tryCountObject = new TryCount(try_count, null);
 
 
@@ -48,21 +48,21 @@ class Authentication {
 
                 //==============start Authentication===============================
                 if (base.checkExistName(name)) {
-                    TryCount tryCount=null;
-                    for( TryCount tryCountTemp : tryCountsArray){
-                        if((tryCountTemp.getName().equals(name))){
+                    TryCountForEachName tryCount = null;
+                    for (TryCountForEachName tryCountTemp : tryCountForEachNameArrayList) {
+                        if ((tryCountTemp.getName().equals(name))) {
                             tryCount = tryCountTemp;
                             break;
                         }
                     }
-                    auth = authentication(base, name,tryCount );
+                    auth = authentication(base, name, tryCount);
 
                 } else {
                     System.out.println(lang.NameNotExist);
                     System.out.println(lang.doYouWantReg);
                     //=====================check input=======================
 
-                    if (input.checkCommands().equals("yes")) {
+                    if (input.checkCommands(lang.doYouWantReg).equals("yes")) {
 
                         Registration reg = new Registration(lang);
                         reg.regAcc(base, lang);
@@ -71,15 +71,17 @@ class Authentication {
                     break;
                 }
 //                TryCount tryCountObjects;
-            } while (tryCount.getTryCount() > 0 && !auth);
+            } while (!auth);//while (tryCount.getTryCount() > 0 && !auth);
         } else {
-            System.out.println(lang.authentificationLocked);
+
+            System.out.println("Authentification Locked");
         }
     }
-    void setTryCount(String name){
+
+    void setTryCount(String name) {
         if (!checkedNames.contains(name)) {
-            tryCount = new TryCount(Count, name);
-            tryCountsArray.add(tryCount);
+            tryCount = new TryCountForEachName(Count, name);
+            tryCountForEachNameArrayList.add(tryCount);
             checkedNames.add(name);
         }
     }
@@ -88,7 +90,7 @@ class Authentication {
     //===============================
     //additional Authentication Function
     //===============================
-    boolean authentication(BaseInterface base, String name, TryCount tryCount) throws IOException, ClassNotFoundException {
+    boolean authentication(BaseInterface base, String name, TryCountForEachName tryCount) throws IOException, ClassNotFoundException {
         // Answer answer = new Answer();
 
         boolean auth = false;
@@ -96,42 +98,39 @@ class Authentication {
 
 
 //===============Input password==========================================
-        System.out.println(lang.inputPassword);
-        int passIn = scan.nextLine().hashCode();
-        //==============checkOutProgram==================================
-        if (passIn == "exit".hashCode() || passIn == "выход".hashCode()) {
-            System.out.println(lang.cancel);
-            return false;
-        }
-
-        //==================check  password for Authentication=========================
-
-        if (passIn == basePass) {
-            auth = true;
-            System.out.println(lang.authentificationCompleted);
-
-        } else {
-            System.out.println(lang.nameOrPasswordWrong);
-            tryCount.decrease();
-            System.out.println(lang.numberTry+" " + tryCount.getTryCount());
-            System.out.println(lang.doYouWantReg);
-            if (input.checkCommands().equals("yes")) {
-
-                reg.regAcc(base, lang);
-            }else {
-                //System.out.println(lang.doYouHaveAcc);
-
+        if (tryCount.getTryCount() > 0) {
+            System.out.println(lang.inputPassword);
+            int passIn = scan.nextLine().hashCode();
+            //==============checkOutProgram==================================
+            if (passIn == "exit".hashCode() || passIn == "выход".hashCode()) {
+                System.out.println(lang.cancel);
+                return false;
             }
 
-            //==============checkOutProgram==================================
+            //==================check  password for Authentication=========================
 
+            if (passIn == basePass) {
+                auth = true;
+                System.out.println(lang.authentificationCompleted);
 
-            //=====================check input=======================
+            } else {
+                System.out.println(lang.nameOrPasswordWrong);
+                tryCount.decrease();
+                System.out.println(lang.numberTry + " " + tryCount.getTryCount());
+                System.out.println(lang.doYouWantReg);
+                if (input.checkCommands(lang.doYouWantReg).equals("yes")) {
 
+                    reg.regAcc(base, lang);
+                }
+            }
+        } else {
+            System.out.println(lang.authentificationLocked + name);
+            System.out.println(lang.doYouWantReg);
+            if (input.checkCommands(lang.doYouWantReg).equals("yes")) {
 
+                reg.regAcc(base, lang);
+            }
         }
-
-
         return auth;
     }
 
